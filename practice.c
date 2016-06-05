@@ -1,29 +1,58 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <dirent.h>
 #include "stringmani.h"
+
 
 int main(){
 
-        char lastName[20];
-        char firstName[20];
-        char total[sizeof(firstName)+sizeof(lastName)];
+        char * fullDir = "";
+        char * subDir = "testosd/";
+        DIR *dir;
+        struct dirent *ent;
+        char filesDir[strlen(fullDir)+strlen(subDir)+1];
+        safestrncpy(filesDir, fullDir, sizeof(filesDir));
+        strncat(filesDir, subDir, strlen(subDir));
 
-        char * pointer1 = lastName;
-        char * pointer2 = firstName;
+        if ((dir = opendir (filesDir)) != NULL) {
+                while ((ent = readdir (dir)) != NULL) {
+                        char * fileName = ent->d_name;
+                        char fileNameBuff[strlen(fileName)+1];
+                        safestrncpy(fileNameBuff, fileName, sizeof(fileNameBuff));
+                        if(fileNameBuff[0]!='.' & fileNameBuff[1] != '.') {
+                                FILE *fp;
+                                char fileDir[strlen(filesDir)+strlen(fileName)+1];
+                                safestrncpy(fileDir, filesDir, sizeof(filesDir));
+                                strncat(fileDir, fileName, strlen(fileName));
 
-        safestrncpy(pointer1, "wqeqwewqdsadsacsacassdadewqewqdsjckdgljewkjlekjrlfdl", sizeof(lastName));
+                                fp = fopen(fileDir, "r");
+                                if (fp == NULL) {
+                                        fprintf(stderr, "Can't open file\n");
 
-        safestrncpy(pointer2, "weoqipoipocxsjvcjvkfjbenbkjgrkjrntjwnkrejnrkjewqnrkwqnewqekwqlkndlksanxlknl", sizeof(firstName));
+                                }
+                                else{
+                                        char buff[1000];
 
-        safestrncpy(total, lastName, sizeof(total));
+                                        while(fgets(buff, sizeof(buff), fp ) != NULL) {
 
-        strncat(total, " ", 1);
-        strncat(total, firstName, strlen(firstName));
+                                          if(strstr(buff, "ayylmao") != NULL) {
+                                              printf("%s\n", buff);
+                                          }
 
-        printf(" lastName    %s\n", lastName);
-        printf(" firstName    %s\n", firstName);
-        printf(" total    %s\n", total);
+                                        }
+
+
+                                }
+                                fclose(fp);
+                        }
+                }
+                closedir (dir);
+        } else {
+                /* could not open directory */
+                printf("Can't open directory\n");
+                return EXIT_FAILURE;
+        }
 
         return 0;
 }
