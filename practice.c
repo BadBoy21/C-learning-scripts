@@ -12,11 +12,11 @@ int main(){
         char * pointer1 = lastName;
         char * pointer2 = firstName;
 
-        safestrncpy(pointer1, "wqeqwewqdsadsacsacassdadewqewqdsjckdgljewkjlekjrlfdl", sizeof(lastName)-1);
+        safestrncpy(pointer1, "wqeqwewqdsadsacsacassdadewqewqdsjckdgljewkjlekjrlfdl", sizeof(lastName));
 
-        safestrncpy(pointer2, "weoqipoipocxsjvcjvkfjbenbkjgrkjrntjwnkrejnrkjewqnrkwqnewqekwqlkndlksanxlknl", sizeof(firstName)-1);
+        safestrncpy(pointer2, "weoqipoipocxsjvcjvkfjbenbkjgrkjrntjwnkrejnrkjewqnrkwqnewqekwqlkndlksanxlknl", sizeof(firstName));
 
-        safestrncpy(total, lastName, sizeof(total)-1);
+        safestrncpy(total, lastName, sizeof(total));
 
         strncat(total, " ", 1);
         strncat(total, firstName, strlen(firstName));
