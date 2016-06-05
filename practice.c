@@ -11,20 +11,19 @@ int main(){
 
         char * pointer1 = lastName;
         char * pointer2 = firstName;
-        safestrncpy(pointer1, "1234556798392182oiwqueoiwqi2143i21h321ih2ejwhdejsdsah", sizeof(lastName)-1);
 
-        safestrncpy(pointer2, "12121weqwqeweqweqwewqewqeqwewqewqewqewqeqeweqwewqewqew", sizeof(firstName)-1);
+        safestrncpy(pointer1, "wqeqwewqdsadsacsacassdadewqewqdsjckdgljewkjlekjrlfdl", sizeof(lastName)-1);
+
+        safestrncpy(pointer2, "weoqipoipocxsjvcjvkfjbenbkjgrkjrntjwnkrejnrkjewqnrkwqnewqekwqlkndlksanxlknl", sizeof(firstName)-1);
 
         safestrncpy(total, lastName, sizeof(total)-1);
 
-
         strncat(total, " ", 1);
         strncat(total, firstName, strlen(firstName));
-        printf("total %i %s\n", strlen(total),total);
 
-        printf("FIRST NAME: %s\n %i \n", firstName,strlen(firstName) );
-        printf("LAST NAME: %s\n %i \n", lastName, strlen(lastName) );
-        printf("TOTAL %s %i\n", total,strlen(total) );
-        
+        printf(" lastName    %s\n", lastName);
+        printf(" firstName    %s\n", firstName);
+        printf(" total    %s\n", total);
+
         return 0;
 }
